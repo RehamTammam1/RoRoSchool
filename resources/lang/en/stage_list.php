@@ -16,6 +16,7 @@ return [
      'Notes'=>'Notes',
      'close'=>'Close',
      'submit'=>'Submit',
-     'gradename'=>'Grade Name'
+     'gradename'=>'Grade Name',
+     'stages_mass_delete'=>'Delete Selected Stages'
 
 ];

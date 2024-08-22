@@ -178,7 +178,7 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         {{trans('message.confirm_delete')}}
-                                                        <input type="hidden" name="id" id="id" class="form-control" value="{{$stage->id}}">
+                                                        <input type="hidden" name="id" id="id" class="form-control" value="{{$grade->id}}">
                                                     </div>
                                                 </div>
                                                 <br><br>

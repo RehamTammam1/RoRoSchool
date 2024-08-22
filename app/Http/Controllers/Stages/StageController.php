@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 namespace App\Http\Controllers\Stages;
+
 use App\Http\Controllers\Controller;
 use App\Models\Grade;
 use App\Models\Stage;
@@ -7,7 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Mockery\ExpectationInterface;
 
-class StageController extends Controller 
+class StageController extends Controller
 {
 
   /**
@@ -19,8 +21,7 @@ class StageController extends Controller
   {
     $stages = Stage::all();
     $grades = Grade::all();
-    return view('stages.stage_list',\compact('stages','grades'));
-    
+    return view('stages.stage_list', \compact('stages', 'grades'));
   }
 
   /**
@@ -28,10 +29,7 @@ class StageController extends Controller
    *
    * @return Response
    */
-  public function create()
-  {
-    
-  }
+  public function create() {}
 
   /**
    * Store a newly created resource in storage.
@@ -41,29 +39,27 @@ class StageController extends Controller
   public function store(Request $request)
   {
     $records = $request->input('group-a');
-    //dd($records);
-     $this->validate($request,[
-     'group-a.*.Name'=>'required',
-      'group-a.*.Name_en'=>'required',
-      'group-a.*.grade_id'=>'required'
-     ]);
-    
-      try{
-         foreach($records as $record ){
-          $stage = new Stage;
-          $stage->name = ['en'=>$record['Name_en'],'ar'=>$record['Name']];
-          $stage->grade_id = $record['grade_id'];
-          $stage->save();
-        }
- 
-       flash()->success(trans('message.success'));
-       return redirect()->route('stages.index');
-  
-      }catch(Exception $e){
 
-        return redirect()->back()->withErrors([trans('message.unsuccessful_operation')]);
+    $this->validate($request, [
+      'group-a.*.Name' => 'required',
+      'group-a.*.Name_en' => 'required',
+      'group-a.*.grade_id' => 'required'
+    ]);
 
-      }   
+    try {
+      foreach ($records as $record) {
+        $stage = new Stage;
+        $stage->name = ['en' => $record['Name_en'], 'ar' => $record['Name']];
+        $stage->grade_id = $record['grade_id'];
+        $stage->save();
+      }
+
+      flash()->success(trans('message.success'));
+      return redirect()->route('stages.index');
+    } catch (Exception $e) {
+
+      return redirect()->back()->withErrors([trans('message.unsuccessful_operation')]);
+    }
   }
 
   /**
@@ -72,10 +68,7 @@ class StageController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function show($id)
-  {
-    
-  }
+  public function show($id) {}
 
   /**
    * Show the form for editing the specified resource.
@@ -83,10 +76,7 @@ class StageController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function edit($id)
-  {
-    
-  }
+  public function edit($id) {}
 
   /**
    * Update the specified resource in storage.
@@ -96,21 +86,17 @@ class StageController extends Controller
    */
   public function update(Request $request)
   {
-    
-      try{
-        $stage = Stage::find($request->id);
-        $stage->name = ['en'=>$request->Name_en,'ar'=>$request->Name] ;
-        $stage->grade_id = $request->grade_id;
-        $stage->save();
-        flash()->success(trans('message.success'));
-        return redirect()->route('stages.index');
 
-      }catch(Exception $e){
-        return redirect()->back()->withErrors([trans('message.unsuccessful_operation')]);
-      } 
-
-
-
+    try {
+      $stage = Stage::find($request->id);
+      $stage->name = ['en' => $request->Name_en, 'ar' => $request->Name];
+      $stage->grade_id = $request->grade_id;
+      $stage->save();
+      flash()->success(trans('message.success'));
+      return redirect()->route('stages.index');
+    } catch (Exception $e) {
+      return redirect()->back()->withErrors([trans('message.unsuccessful_operation')]);
+    }
   }
 
   /**
@@ -119,22 +105,15 @@ class StageController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function destroy(Request $request){
+  public function destroy(Request $request)
+  {
 
-    try{
+    try {
       Stage::find($request->id)->delete();
       flash()->success(trans('message.delete'));
       return redirect()->route('stages.index');
-    }
-    catch(Exception $e){
+    } catch (Exception $e) {
       return redirect()->back()->withErrors([trans('message.unsuccessful_operation')]);
-
     }
-    
- 
-  
   }
-  
 }
-
-?>

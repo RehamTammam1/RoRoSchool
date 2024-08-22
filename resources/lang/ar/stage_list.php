@@ -16,6 +16,7 @@ return [
      'Notes'=>'ملاحظات',
      'close'=>'غلق',
      'submit'=>'حفظ',
-     'gradename'=>'المرحلة الدراسية'
+     'gradename'=>'المرحلة الدراسية',
+     'stages_mass_delete'=>'حذف الصفوف المختارة'
 
 ];

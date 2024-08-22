@@ -7,6 +7,8 @@ use Exception;
 use Flasher\Laravel\Http\Request;
 use Illuminate\Http\Request as HttpRequest;
 
+use function PHPSTORM_META\type;
+
 class GradeController extends Controller 
 {
 
@@ -126,6 +128,14 @@ class GradeController extends Controller
   public function destroy(HttpRequest $request)
   {
     try{
+
+      $grades = ModelsGrade::find($request->id);
+      
+      if($grades->stages()->exists()){
+
+        flash()->error(trans('message.grade_delete_restrection'));
+        return redirect()->back();
+      }
       $grade = ModelsGrade::find($request->id);
       $grade->delete();
       flash()->success(trans('message.delete'));

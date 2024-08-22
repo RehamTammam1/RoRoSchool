@@ -29,3 +29,20 @@
 <script src="{{ URL::asset('assets/js/lobilist.js') }}"></script>
 <!-- custom -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
+<script>
+    function CheckAll(classname, elem) {
+        var elements = document.getElementsByClassName(classname);
+        var elements_length = elements.length;
+        if (elem.checked) {
+            for (var i = 0; i < elements_length; i++) {
+                elements[i].checked = true;
+
+            }
+        } else {
+            for (var i = 0; i < elements_length; i++) {
+                elements[i].checked = false;
+
+            }
+        }
+    }
+</script>
